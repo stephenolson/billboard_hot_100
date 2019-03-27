@@ -1,38 +1,18 @@
 class BillboardHot100::Scraper
 
-  def get_page
-    Nokogiri::HTML(open("https://www.billboard.com/charts/hot-100"))
-  end
-
-  def scrape_songs
-    self.get_page.css("div.chart-list-item")
-  end
-
-  def make_songs
-    scrape_songs.each do |song|
-      BillboardHot100::Song.songs(song)
+  def self.scrape_songs
+    doc = Nokogiri::HTML(open("https://www.billboard.com/charts/hot-100"))
+    doc.css("div.chart-list-item").each do |song|
+      BillboardHot100::Song.new(
+      rank = song.css(".chart-list-item__rank").text.strip,
+      title = song.css(".chart-list-item__title-text").text.strip,
+      artist = song.css(".chart-list-item__artist").text.strip,
+      last_week = song.css(".chart-list-item__last-week").text.strip,
+      peak_position = song.css(".chart-list-item__weeks-at-one").text.strip,
+      weeks_on_chart = song.css(".chart-list-item__weeks-on-chart").text.strip,
+      lyrics = song.css('div.chart-list-item__lyrics a').map { |link| link['href'] }.join,
+      award = song.css('chart-list-item__award-icon').text.strip)
     end
   end
-
-  def scrape_dates
-    self.get_page.css("div.chart-detail-header__select-date")
-  end
-
-  def make_dates
-    scrape_dates.each do |date|
-      BillboardHot100::Date.dates(date)
-    end
-  end
-
-  # billboard.com changed their code, making a separate "number_1" unecessary
-  # def scrape_number_1
-  #   self.get_page.css("div.chart-number-one__info")
-  # end
-
-  # def make_number_1
-  #  scrape_number_1.each do |song|
-  #    BillboardHot100::Song.number_1(song)
-  #  end
-  # end
 
 end
