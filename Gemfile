@@ -5,7 +5,7 @@ gem 'pry'
 gem 'nokogiri', '1.6.6.2'
 gem 'rspec'
 
-require_relative './lib/worlds_best_restaurants/version'
+require_relative './lib/billboard_hot_100/version'
 
 Gem::Specification.new do |s|
   s.name        = 'billboard_hot_100'
