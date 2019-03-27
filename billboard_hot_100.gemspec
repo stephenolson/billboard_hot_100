@@ -1,28 +1,35 @@
-# A sample Gemfile
-source "https://rubygems.org"
+# coding: utf-8
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'billboard_hot_100/version'
 
-gem 'pry'
-gem 'nokogiri', '1.6.6.2'
-gem 'rspec'
+Gem::Specification.new do |spec|
+  spec.name          = "billboard_hot-100"
+  spec.version       = BillboardHot100::VERSION
+  spec.authors       = ["Stephen Olson"]
+  spec.email         = ["stephenolson@gmail.com"]
 
-require_relative './lib/billboard_hot_100/version'
+  spec.summary       = %q{Billboard Hot 100}
+  spec.homepage      = "https://github.com/stephenolson/billboard_hot_100.git"
+  spec.license       = "MIT"
 
-Gem::Specification.new do |s|
-  s.name        = 'billboard_hot_100'
-  s.version     = BillboardHot100::VERSION
-  s.date        = '2019-03-26'
-  s.summary     = "Billboard Hot 100"
-  s.description = "Provides the current weeks Billboard Hot 100"
-  s.authors     = ["Stephen Olson"]
-  s.email       = 'stephenolson@gmail.com'
-  s.files       = Dir["{bin,lib}/**/*"]
-  s.homepage    = 'http://rubygems.org/'
-  s.license     = 'MIT'
-  s.executables << 'billboard_hot_100'
+  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
+  # to allow pushing to a single host or delete this section to allow pushing to any host.
+  if spec.respond_to?(:metadata)
+    spec.metadata['allowed_push_host'] = "https://rubygems.org/"
+  else
+    raise "RubyGems 2.0 or newer is required to protect against public gem pushes."
+  end
 
-  s.add_development_dependency "bundler", "~> 1.10"
-  s.add_development_dependency "rake", "~> 10.0"
-  s.add_development_dependency "rspec", ">= 0"
-  s.add_development_dependency "nokogiri", ">= 0"
-  s.add_development_dependency "pry", ">= 0"
+  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
+  # spec.bindir        = "exe"
+
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.require_paths = ["lib"]
+
+  spec.add_development_dependency "bundler", "~> 1.12"
+  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "pry"
+  spec.add_dependency "nokogiri"
 end
