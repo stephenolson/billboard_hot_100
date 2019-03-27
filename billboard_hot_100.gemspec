@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.description = "Provides the current weeks Billboard Hot 100"
   s.authors     = ["Stephen Olson"]
   s.email       = 'stephenolson@gmail.com'
-  s.files       = ["lib/billboard_hot_100.rb", "lib/billboard_hot_100/cli.rb", "lib/billboard_hot_100/scraper.rb", "lib/billboard_hot_100/song.rb", "config/environment.rb"]
+  s.files       = Dir["{bin,lib}/**/*"]
   s.homepage    = 'http://rubygems.org/'
   s.license     = 'MIT'
   s.executables << 'billboard_hot_100'
