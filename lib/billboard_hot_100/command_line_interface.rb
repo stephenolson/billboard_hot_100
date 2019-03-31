@@ -3,7 +3,7 @@ class BillboardHot100::CommandLineInteface
   def run
     BillboardHot100::Scraper.scrape_songs
     welcome
-    list_songs
+    list_ranges
     more_info
     goodbye
   end
@@ -13,7 +13,7 @@ class BillboardHot100::CommandLineInteface
     puts "Welcome to the this weeks Billboard Hot 100!"
   end
 
-  def list_songs
+  def list_ranges
     puts ""
     puts "Please enter the ranking you wish to see..."
     puts ""
@@ -25,34 +25,22 @@ class BillboardHot100::CommandLineInteface
 
   def display_songs(input)
     case input
-      when 1..10
-        display_ten_songs(00, 10)
-      when 11..20
-        display_ten_songs(10, 20)
-      when 21..30
-        display_ten_songs(20, 30)
-      when 31..40
-        display_ten_songs(30, 40)
-      when 41..50
-        display_ten_songs(40, 50)
-      when 51..60
-        display_ten_songs(50, 60)
-      when 61..70
-        display_ten_songs(60, 70)
-      when 71..80
-        display_ten_songs(70, 80)
-      when 81..90
-        display_ten_songs(80, 90)
-      when 91..100
-        display_ten_songs(90, 100)
+      when 1..100
+        increment = 10
+        quantize(input, increment)
       else
         invalid_choice
-    end
+      end
   end
 
-  def display_ten_songs(low_num, top_num)
+  def quantize(input, increment)
+    low_num = ((input-1)/increment).floor*increment
+    display_ten_songs(low_num)
+  end
+
+  def display_ten_songs(low_num)
     puts ""
-    puts "Displaying songs #{low_num+1} through #{top_num}"
+    # puts "Displaying songs #{low_num} through #{low_num}"
     puts ""
     BillboardHot100::Song.all[low_num,10].each do |song|
       puts "#{song.rank}. #{song.title} by #{song.artist}"
@@ -75,7 +63,7 @@ class BillboardHot100::CommandLineInteface
 
       input = gets.strip.downcase
       if input == "y"
-        list_songs
+        list_ranges
       elsif input == "n"
         goodbye
       else
@@ -114,7 +102,7 @@ class BillboardHot100::CommandLineInteface
   def invalid_choice
     puts ""
     puts "Invalid Choice!"
-    list_songs
+    list_ranges
   end
 
 end
