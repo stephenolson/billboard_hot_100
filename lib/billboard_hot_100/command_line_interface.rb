@@ -40,7 +40,7 @@ class BillboardHot100::CommandLineInteface
 
   def display_ten_songs(low_num)
     puts ""
-    # puts "Displaying songs #{low_num} through #{low_num}"
+    puts "Displaying songs #{low_num} through #{low_num}"
     puts ""
     BillboardHot100::Song.all[low_num,10].each do |song|
       puts "#{song.rank}. #{song.title} by #{song.artist}"
