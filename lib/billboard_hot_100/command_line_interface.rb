@@ -8,17 +8,13 @@ class BillboardHot100::CommandLineInteface
     goodbye
   end
 
-  def welcome
-    puts ""
-    puts "Welcome to the this weeks Billboard Hot 100!"
+  def welcome 
+    puts "\nWelcome to the this weeks Billboard Hot 100!\n"
   end
 
   def list_ranges
-    puts ""
-    puts "Please enter the ranking you wish to see..."
-    puts ""
-    puts "Enter 1-10, 11-20, 21-30, 31-40, 41-50, 51-60, 61-70, 71-80, 81-90 or 91-100"
-    puts ""
+    puts "\nPlease enter the rankings you wish to see...\n"
+    puts "\nEnter 1-10, 11-20, 21-30, 31-40, 41-50, 51-60, 61-70, 71-80, 81-90 or 91-100\n"
     input = gets.strip.to_i
     display_songs(input)
   end
@@ -30,7 +26,7 @@ class BillboardHot100::CommandLineInteface
         quantize(input, increment)
       else
         invalid_choice
-      end
+    end
   end
 
   def quantize(input, increment)
@@ -39,31 +35,25 @@ class BillboardHot100::CommandLineInteface
   end
 
   def display_ten_songs(low_num)
-    puts ""
-    puts "Displaying songs #{low_num} through #{low_num}"
-    puts ""
+    puts "\nDisplaying songs #{low_num+1} through #{low_num+10}\n"
     BillboardHot100::Song.all[low_num,10].each do |song|
       puts "#{song.rank}. #{song.title} by #{song.artist}"
     end
   end
   
   def more_info
-      puts ""
-      puts "Please enter the song you want more information on."
-      puts ""
+      puts "\nPlease enter the song you want more information on.\n"
       input = gets.strip
       
       song = BillboardHot100::Song.all[input.to_i-1]
 
       display_song(song)
 
-      puts ""
-      puts "Would you like information on another song? Enter Y or N"
-      puts ""
+      puts "\nWould you like information on another song? Enter Y or N\n"
 
       input = gets.strip.downcase
       if input == "y"
-        list_ranges
+        run
       elsif input == "n"
         goodbye
       else
@@ -72,8 +62,7 @@ class BillboardHot100::CommandLineInteface
   end
 
   def display_song(song)
-    puts ""
-    puts "#{song.title} by #{song.artist}"
+    puts "\n#{song.rank}. #{song.title} by #{song.artist}"
       if song.last_week.length > 0 && !song.last_week.include?("-")
         puts "Last Week: #{song.last_week}"
       else
@@ -94,15 +83,13 @@ class BillboardHot100::CommandLineInteface
   end
 
   def goodbye
-    puts ""
-    puts "Check back next week for the latest Billboard Hot 100!"
+    puts "\nCheck back next week for the latest Billboard Hot 100!"
     exit
   end
 
   def invalid_choice
-    puts ""
-    puts "Invalid Choice!"
-    list_ranges
+    puts "\nInvalid Choice!"
+    run
   end
 
 end
