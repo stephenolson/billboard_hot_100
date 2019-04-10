@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
-gem 'pry'
-gem 'nokogiri', '1.6.6.2'
-gem 'rspec'
+git_source(:github) {|repo_name| "https://github.com/stephenolson/billboard_hot_100" }
+
+# Specify your gem's dependencies in billboard_hot_100.gemspec
+gemspec

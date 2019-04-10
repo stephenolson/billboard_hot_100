@@ -11,4 +11,4 @@ require "billboard_hot_100"
 # Pry.start
 
 require "irb"
-IRB.start
+IRB.start(__FILE__)
