@@ -7,11 +7,7 @@ This gem allows users to access the current weeks Billboard Hot 100.
 Add this line to your application's Gemfile:
 
 ```ruby
-<<<<<<< HEAD
 gem 'billboard_hot_100_CLI'
-=======
-gem 'billboard_hot_100'
->>>>>>> 8f4b61da4e93771d1b9e0a87846287dbb489afd9
 ```
 
 And then execute:
@@ -20,11 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-<<<<<<< HEAD
     $ gem install billboard_hot_100_CLI
-=======
-    $ gem install billboard_hot_100
->>>>>>> 8f4b61da4e93771d1b9e0a87846287dbb489afd9
 
 ## Usage
 
