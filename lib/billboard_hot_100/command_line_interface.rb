@@ -20,8 +20,10 @@ class BillboardHot100::CommandLineInteface
   end
 
   def display_songs(input)
-    case input
-      when 1..100
+    total = BillboardHot100::Song.all.size
+    
+    case input  
+      when 1..total
         increment = 10
         quantize(input, increment)
       else
@@ -31,12 +33,12 @@ class BillboardHot100::CommandLineInteface
 
   def quantize(input, increment)
     low_num = ((input-1)/increment).floor*increment
-    display_ten_songs(low_num)
+    display_ten_songs(low_num, increment)
   end
 
-  def display_ten_songs(low_num)
-    puts "\nDisplaying songs #{low_num+1} through #{low_num+10}\n\n"
-    BillboardHot100::Song.all[low_num,10].each do |song|
+  def display_ten_songs(low_num, increment)
+    puts "\nDisplaying songs #{low_num+1} through #{low_num+increment}\n\n"
+    BillboardHot100::Song.all[low_num,increment].each do |song|
       puts "#{song.rank}. #{song.title} by #{song.artist}"
     end
   end
