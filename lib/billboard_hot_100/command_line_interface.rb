@@ -2,6 +2,10 @@ class BillboardHot100::CommandLineInteface
 
   def run
     BillboardHot100::Scraper.scrape_songs
+    main_menu
+  end
+
+  def main_menu
     welcome
     list_ranges
     more_info
@@ -13,18 +17,27 @@ class BillboardHot100::CommandLineInteface
   end
 
   def list_ranges
+    total = BillboardHot100::Song.all.size
+    increment = 10
+    song_ranges = total/increment
+    ranking = 1
     puts "\nPlease enter the rankings you wish to see...\n"
-    puts "\nEnter 1-10, 11-20, 21-30, 31-40, 41-50, 51-60, 61-70, 71-80, 81-90 or 91-100\n"
+  
+    song_ranges.times do
+      puts "#{ranking}-#{ranking+increment-1}"
+      ranking += increment
+    end
+  
     input = gets.strip.to_i
-    display_songs(input)
+    display_songs(input, increment)
+  
   end
 
-  def display_songs(input)
+  def display_songs(input, increment)
     total = BillboardHot100::Song.all.size
     
     case input  
       when 1..total
-        increment = 10
         quantize(input, increment)
       else
         invalid_choice
@@ -55,7 +68,7 @@ class BillboardHot100::CommandLineInteface
 
       input = gets.strip.downcase
       if input == "y"
-        run
+        main_menu
       elsif input == "n"
         goodbye
       else
@@ -91,7 +104,7 @@ class BillboardHot100::CommandLineInteface
 
   def invalid_choice
     puts "\nInvalid Choice!"
-    run
+    main_menu
   end
 
 end
