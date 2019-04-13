@@ -21,21 +21,22 @@ class BillboardHot100::CommandLineInteface
     increment = 10
     song_ranges = total/increment
     ranking = 1
+    ranges = ""
     puts "\nPlease enter the rankings you wish to see...\n"
   
     song_ranges.times do
-      puts "#{ranking}-#{ranking+increment-1}"
+      ranges << "#{ranking}-#{ranking+increment-1}, "
       ranking += increment
     end
+
+    puts ranges[0...-2]
   
     input = gets.strip.to_i
-    display_songs(input, increment)
+    display_songs(input, total, increment)
   
   end
 
-  def display_songs(input, increment)
-    total = BillboardHot100::Song.all.size
-    
+  def display_songs(input, total, increment)    
     case input  
       when 1..total
         quantize(input, increment)
