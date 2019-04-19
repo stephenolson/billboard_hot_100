@@ -1,7 +1,7 @@
 class BillboardHot100::CommandLineInteface
 
   def run
-    BillboardHot100::Scraper.scrape_songs
+    BillboardHot100::Scraper.new.make_songs
     welcome
   end
 
