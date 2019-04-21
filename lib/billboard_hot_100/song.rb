@@ -4,23 +4,19 @@ class BillboardHot100::Song
 
   @@all = []
 
-  def initialize(songs4)
-    songs4.each {|key, value| self.send(("#{key}="), value)}
+  def initialize(song_hash)
+    song_hash.each {|key, value| self.send(("#{key}="), value)}
     @@all << self
   end
 
-  def self.create(songs5)
-    songs5.each do |songs6|
-      self.new(songs6)
+  def self.create(songs)
+    songs.each do |song|
+      self.new(song)
     end
   end
 
   def self.all
     @@all
-  end
-
-  def self.find(index)
-    self.all[index-1]
   end
 
 end
