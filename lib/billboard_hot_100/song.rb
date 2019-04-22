@@ -10,9 +10,9 @@ class BillboardHot100::Song
     end
   end
 
-  def initialize(song_hash)
+  def initialize song_hash = {}
     song_hash.each do |key, value| 
-      self.send(("#{key}="), value)
+      self.send("#{key}=", value)
     end
     @@all << self
   end
