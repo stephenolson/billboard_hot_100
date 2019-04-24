@@ -1,8 +1,8 @@
 class BillboardHot100::Scraper
   def self.scrape_songs
     songs = []
-    index = Nokogiri::HTML(open("https://www.billboard.com/charts/hot-100"))
-      index.css("div.chart-list-item").each do |song|
+    doc = Nokogiri::HTML(open("https://www.billboard.com/charts/hot-100"))
+      doc.css("div.chart-list-item").each do |song|
         songs << {
           rank: song.css(".chart-list-item__rank").text.strip,
           title: song.css(".chart-list-item__title-text").text.strip,
